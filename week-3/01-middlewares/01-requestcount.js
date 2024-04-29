@@ -5,6 +5,12 @@ const express = require('express');
 const app = express();
 let requestCount = 0;
 
+function requestCountMw(req, res, next){
+  console.log(requestCount)
+  requestCount++
+  next();
+}
+app.use(requestCountMw)
 // You have been given an express server which has a few endpoints.
 // Your task is to create a global middleware (app.use) which will
 // maintain a count of the number of requests made to the server in the global
@@ -22,4 +28,5 @@ app.get('/requestCount', function(req, res) {
   res.status(200).json({ requestCount });
 });
 
+app.listen(3009)
 module.exports = app;
